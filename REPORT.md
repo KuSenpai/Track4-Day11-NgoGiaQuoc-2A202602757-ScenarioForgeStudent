@@ -79,11 +79,11 @@ Tổng (`total`): seed 0 = 1,07·10⁻³ [4,0·10⁻⁴; 3,0·10⁻³], seed 1 =
 
 `hunt.json: found`: cuộc săn `bus_bypass` tìm được {`bus_bypass`: 120}, cuộc săn `crosswalk_block` tìm được {`crosswalk_block`: 32}. Cuộc săn `cut_in` chỉ ra {`bus_bypass`: 28}; cuộc săn `rear_ended` ra {`bus_bypass`: 31, `crosswalk_block`: 9}.
 
-**`bus_bypass`** — ![bus_bypass](evidence/shots/bus_bypass.png)
-Xe buýt đỗ ở trạm trong làn E2 (x ≈ 106 m). C2 kẹt sau xe buýt, chấp nhận một khe rất nhỏ (ví dụ `cutGap` ≈ 5 m, đường ướt μ = 0,5) để lách sang làn E1 của xe ta, rồi gần như đứng lại giữa hai làn (z ≈ 3,1 m, v ≈ 0,1 m/s) đúng lúc xe buýt bắt đầu chạy. Xe ta đang bò chậm (~2,8 m/s) vì thận trọng gần vạch bị che, nhưng không coi C2 nằm chéo làn là xe phía trước kịp, và đâm vào C2 (`contact: front`, t ≈ 12,75 s).
+**`bus_bypass`** (chương 9, kịch bản B-01, t = 12,6 s) — ![bus_bypass](evidence/shots/bus_bypass.png)
+Xe buýt đỗ ở trạm trong làn E2 (x ≈ 106 m). C2 kẹt sau xe buýt, chấp nhận một khe nhỏ (`cutGap` 7,35 m, đường ướt μ = 0,5) để lách sang làn E1 của xe ta, rồi gần như đứng lại khi còn nằm chéo giữa hai làn (z ≈ 3,2 m, v ≈ 0,5 m/s) đúng lúc xe buýt vừa rời trạm (`busGo` 12,17 s). Xe ta đang chạy chậm (3,8 m/s) vì thận trọng gần vạch bị che, nhưng không coi C2 nằm chéo làn là xe phía trước kịp, và đâm vào C2 (`contact: front`, t = 12,6 s).
 
-**`crosswalk_block`** — ![crosswalk_block](evidence/shots/crosswalk_block.png)
-Người đi bộ P1 đứng sau xe buýt ở vạch qua đường x = 122 m và không ngó qua xe buýt (`pedLook` = 0). Planner không thấy P1 cho đến khi người đã bước ra, phanh quá muộn trên đường ướt, và dừng hẳn với đầu xe nằm trên vạch (xe ta x ≈ 120,5 m, v = 0). P1 không bước vào thân xe nên đứng lại giữa đường: sự kiện `kind: block`.
+**`crosswalk_block`** (chương 9, kịch bản C-02, t = 22,2 s) — ![crosswalk_block](evidence/shots/crosswalk_block.png)
+Người đi bộ P1 đứng sau xe buýt ở vạch qua đường x = 122 m và không ngó qua xe buýt (`pedLook` = 0). Planner không thấy P1 cho đến khi người đã bước ra, phanh quá muộn trên đường ướt (μ = 0,5), và dừng hẳn với đầu xe nằm trên vạch (xe ta x ≈ 119,7 m, v = 0, t = 22,2 s). P1 không bước vào thân xe nên đứng lại giữa đường: sự kiện `kind: block`.
 
 **Kiểu không tìm thấy:** `cut_in` và `rear_ended`. Cả hai cuộc săn đều chạy đủ 8 vòng mà không ra một va chạm đúng kiểu nào; Monte Carlo cũng không thấy (`mc.json: per_mode.cut_in.k` = 0, `rear_ended.k` = 0). Mức tin: chỉ dám nói chúng **hiếm hơn** khoảng 10⁻³ (cận trên MC 1,28·10⁻³), không nói được là không có. CEM với điểm nguy hiểm hiện tại có thể đơn giản là không leo tới vùng đó.
 
@@ -104,7 +104,7 @@ TRAIN chỉ dùng để sàng. Trên TRAIN, bản sửa có 0 vụ `bus_bypass` 
 
 **Vì sao `fail_hi` của bản sửa (2,10·10⁻³) lớn hơn `fail` của policy gốc (9,76·10⁻⁴)?** `fail_hi` là cận trên, không phải ước lượng. Nó cộng thêm ±1,96·se của IS (với `top_share` 0,60 và 0,87 thì se lớn) và cận trên Wilson 1,28·10⁻³ của các va chạm khác (`other_crashes`: k = 0 trên n = 3 000). Phần bất định đó lớn hơn cả bản thân xác suất, nên so cận trên của bản sửa với điểm ước lượng của bản gốc là so khập khiễng. So đúng là cận với cận (2,10·10⁻³ < 3,15·10⁻³) hoặc ước lượng với ước lượng.
 
-Ảnh có bóng mờ (policy gốc) trên một kịch bản `bus_bypass` mà bản sửa tránh được: ![fix ghost](evidence/shots/fix_ghost.png)
+Ảnh chương 9, kịch bản B-02 (`bus_bypass`, t = 12,8 s): xe đặc chạy policy gốc và đâm C2 (vòng đỏ); bóng mờ là bản sửa `cutinLat` 2,6 trên cùng kịch bản, coi C2 đang lấn sang là xe phía trước sớm hơn nên dừng lại phía sau, không va chạm. ![fix ghost](evidence/shots/fix_ghost.png)
 
 **Núm "nghe thì an toàn hơn" nhưng phản tác dụng** (`fix.json: table`, trên TRAIN):
 - **`T` = 2,0** (giữ khoảng cách lớn hơn 1,6 s): `crosswalk_block` tăng từ 1,12·10⁻⁶ lên **4,89·10⁻⁶** (gấp 4,4 lần, hits 38 lên 65). Thế giới phản ứng lại khoảng trống phía trước xe ta: người đi bộ quyết định băng khi xe gần nhất họ thấy còn đủ xa, và xe nhập làn chấp nhận khe vừa đủ (thị trấn C có trung vị `cutGap` chỉ 10 m). Khoảng trống lớn hơn mời họ đi vào, nên xe ta phải dừng gấp hơn và hay dừng với thân xe trên vạch.
@@ -152,6 +152,6 @@ Nếu có thêm một tuần: (a) chạy MC lớn hơn (~25 000 lần) cho `bus_
 
   **"Tránh được" là chuẩn lạc quan theo hai chiều:** (1) người phanh "thần" biết ngay đó là nguy hiểm từ khung hình đầu tiên nhìn thấy và phanh tối đa μ·g, không có thời gian nhận biết hay phản xạ, nên `avoidable` **đếm nhiều hơn** số vụ một planner thật tránh được (đây là cận trên của lỗi planner theo nghĩa này); (2) ngược lại, chỉ thử phanh mà không thử đánh lái, nên vài vụ tránh được bằng lách sẽ bị xếp vào `unavoidable` và **đếm ít đi**.
 
-- **Hình:** ![mine](evidence/shots/mine_hazard.png) _(chương 9, kịch bản `GB-01` sau `export`, ở lúc va chạm)_
+- **Hình:** ![mine](evidence/shots/mine_hazard.png) _(chương 9, kịch bản GB-01, t = 16,0 s: xe ta đi cạnh xe buýt đang đỗ và đâm người băng ngang từ phía bên kia đường, vòng đỏ)_
 - **Bạn tự lái thì sao:** _(điền sau khi tự lái ở chương 10: bấm "Bạn", nhớ rằng bạn đã xem lại cảnh nhiều lần còn planner thì không)_
 - **Cách sửa:** chạy thêm ngoài `evidence/` (600 lần rút cùng `space`, không nằm trong `mine.json`), số vụ `avoidable`: policy gốc 11; `pedBuffer` 3,5 hoặc 5,0 vẫn **11** (không đổi); `b` 3,0 ra 12; `T` 2,0 ra 8; `cautionRange` 120 m ra 7; `v0` 10 m/s ra 6. `pedBuffer` không có tác dụng vì biên an toàn đó chỉ áp cho người ở vạch qua đường; giảm tốc chung (`v0`, `cautionRange`) giảm khoảng một nửa nhưng làm mất quãng đường ở mọi nơi. Không núm nào sửa tận gốc, nên planner cần **logic mới**: theo dõi **mọi** người đi bộ đang ở trên lòng đường (không chỉ ở vạch), dự đoán quỹ đạo của họ, và nếu quỹ đạo cắt làn xe ta trong vài giây tới thì nhường đến khi người đó qua hẳn, thay vì chỉ giảm tốc. Thêm một vùng giảm tốc quanh trạm xe buýt khi có xe buýt đang đỗ, vì đó là nơi người hay chạy băng ngang.
