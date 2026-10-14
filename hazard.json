@@ -1,0 +1,47 @@
+{
+ "format": "avsim-studio/1",
+ "params": {
+  "cutT0": 11.654714723329072,
+  "cutDur": 3.9683855745732575,
+  "cutV": 13.5363485624979,
+  "cutDs": -10.266591535590276,
+  "pedT0": 8.647640426403887,
+  "pedV": 1.7857425485196308,
+  "busGo": 12.775506695186753,
+  "tgT": 1.1044647518325723,
+  "cutGap": 4.9452196318265065,
+  "pedGap": 4.706967739158088,
+  "mu": 0.8,
+  "pedLook": 1,
+  "cutBrake": 0.0,
+  "civil": true
+ },
+ "policy": {},
+ "hazards": [
+  {
+   "x": 114.94,
+   "side": "N",
+   "v": 2.46,
+   "t0": 0.0,
+   "trig": 33.76,
+   "type": "ped"
+  }
+ ],
+ "ego": "planner",
+ "space": {
+  "h0_x": [
+   100,
+   118
+  ],
+  "h0_v": [
+   1.2,
+   2.5
+  ],
+  "h0_trig": [
+   12,
+   35
+  ]
+ },
+ "exposure": 0.02,
+ "why": "Hành khách chạy băng ngang giữa khối nhà (không qua vạch ở x=80) để kịp chuyến xe buýt đang đỗ ở trạm (x≈100–112), xuất phát từ vỉa hè phía bắc, ngay quanh đầu xe buýt: h0_x 100–118 m. h0_v 1,2–2,5 m/s: từ đi bình thường (~1,2–1,5 m/s, tốc độ băng đường thường dùng khi thiết kế đèn tín hiệu) đến chạy chậm để kịp xe; trên 2,5 m/s là chạy nước rút, ngoài phạm vi. h0_trig 12–35 m: người bắt đầu băng khi xe ta còn cách 12–35 m; dưới 12 m đã ngang quãng phanh ở 12 m/s với mu=0,8 (≈9 m) nên không ai tránh nổi, trên 35 m thì người lái nào cũng kịp phản ứng. exposure 0,02 mỗi chuyến: giả định một chuyến đi nội thành qua ~4 trạm có xe buýt đang đỗ, mỗi lần ~0,5% có người băng ngang trong cửa sổ 12–35 m trước xe; đây là ước lượng của mình, cần thay bằng tần suất đếm từ video camera tại trạm xe buýt."
+}
